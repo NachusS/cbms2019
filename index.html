@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Snomed2Vec CBMS2019 Presentation</title>
+
+		<meta name="description" content="Snomed2Vec representation of Snomed CT terms with Word2Vec">
+		<meta name="author" content="Ignacio Martinez Soriano">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<!-- <link rel="stylesheet" href="css/main.css"> -->
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+		
+		<!-- For syntax highlighting  -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+		
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			
+			<section data-background-transition="slide" data-background="images/fondo01-1920x650.jpg" style="background: rgba(0,129,195,.9); color: white" >
+				<h4 style="color: rgba(255, 225, 255, .9)">
+					CBMS 2019 IEEE International Symposium on Computer-Based Medical Systems<br>
+				</h4>
+				<h3 style="color: rgba(255, 225, 255, .9)">
+					<code>Snomed2Vec</code>: representation of SNOMED-CT terms with Word2Vec
+				</h3>
+				
+				<p>Ignacio Martinez Soriano</p>
+				<h4 style="color: rgba(255, 225, 255, .9)">(05-07)-Jun. Cordoba.</h4>
+					<small><p>Medlab MediaGroup S.L.<br>
+							Hospital University "Rafael Mendez"<br>
+							University of Granada <br>
+							University of Murcia 
+					</p></small>
+						
+			</section>
+				<section>
+					<h1>Snomed2Vec</h1>
+					<ul>
+						<li>Introduction</li>
+						<li>Word Embeddings</li>
+						<li>Snomed-CT</li>
+						<li>Snomed2Vec Approach</li>
+						<li>Use Cases</li>
+						<li>Evaluation and Tips</li>
+						<li>Conclusion and Outlook</li>
+						<li>Project Web And Notebooks</li>
+						
+					</ul>
+				</section>
+				
+				<section data-transition="zoom" data-background="images/cbms_fondo00.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">1. Introduction:</h2>
+				</section>												
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>Introduction:</h2>
+						<p>
+							(E.H.R) Electronics Health Records
+						</p>
+						<aside class="notes">
+							The information in the EHR, include heterogeneous information from different sources.
+							The majority if the clinical information is unstructured as free text.
+						</aside>
+					</section>				
+					<section>
+						<h2>Clasical N.E.R. Tools:</h2>
+						<p>Slides can be nested inside of each other.</p>
+						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<br>
+
+					</section>
+					<section>
+						<h2>Spanish NER Tools:</h2>
+						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+					</section>
+
+				</section>
+				<section data-transition="zoom"; data-background="images/cbms_fondo01.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">2. Word embedding:</h2>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Escribiendo en Markdown **Esto es una prueba**.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> 
+						<span class="fragment">fragmented</span> 
+						<span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p>
+							<span style="display: inline-block;" class="fragment fade-right">fade-right, </span>
+							<span style="display: inline-block;" class="fragment fade-up">up, </span>
+							<span style="display: inline-block;" class="fragment fade-down">down, </span>
+							<span style="display: inline-block;" class="fragment fade-left">left</span>
+						</p>
+						<p class="fragment fade-in-then-out">fade-in-then-out</p>
+						<p class="fragment fade-in-then-semi-out">fade-in-then-semi-out</p>
+						<p>Highlight <span class="fragment highlight-red">red</span> <span class="fragment highlight-blue">blue</span> <span class="fragment highlight-green">green</span></p>
+					</section>
+				</section>
+				<section data-transition="zoom" data-background="images/cbms_fondo03.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">3. Snomed-CT:</h2>
+				</section>	
+
+
+				
+				<section data-background-iframe="https://nachuss.github.io/" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Nachus' Page</h2>
+						<p>Pagina personal del Autor de la presentacion</p>
+					</div>
+				</section>				
+
+				<section data-transition="zoom" data-background="images/cbms_fondo04.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">4. Snomed2Vec Approach:</h2>
+				</section>	
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+						import React, { useState } from 'react';
+
+						function Example() {
+							const [count, setCount] = useState(0);
+
+						return (
+							&lt;div&gt;
+							&lt;p&gt;You clicked {count} times&lt;/p&gt;
+							&lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+							Click me
+							&lt;/button&gt;
+							&lt;/div&gt;
+							);
+						}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section data-transition="zoom" data-background="images/cbms_fondo05.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">5. Use Cases:</h2>
+				</section>	
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">The nice thing about standards is that there are so many to choose from</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+				<section data-transition="zoom" data-background="images/cbms_fondo06.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">6. Use Cases:</h2>
+				</section>	
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+										Reveal.addEventListener( 'customevent', function() {
+										console.log( '"customevent" has fired' );
+										} );
+					</code></pre>
+				</section>
+				<section data-transition="zoom" data-background="images/cbms_fondo07.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">7. Evaluation and tips:</h2>
+				</section>
+				
+				<section data-transition="zoom" data-background="images/cbms_fondo08.jpg">
+					<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">8. Conclusion and Outlook:</h2>
+				</section>				
+				
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						Autores: <br>
+						- <a href="https://nachuss.github.io/">Ignacio Martínez Soriano</a> <br>
+						- <a href="http://decsai.ugr.es/index.php?p=profesores&id=7932">Juan Luis Castro Peña</a> <br>
+						- <a href="https://webs.um.es/jfernand/miwiki/doku.php">Jesualdo Tomas Fenandez Breis</a> <br>
+						- <a href="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es">Ignacio San Roman Lana</a> <br>
+						- <a href="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es">Adrian Alonso</a> <br>
+						- <a href="https://www.murciasalud.es/caps.php?op=mostrar_centro&id_centro=14&tipo_centro=hospital&idsec=6">David Guevara Baraza</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+	<div style="position: absolute; bottom: 10px; left: 100%;  margin-left: -250px">
+				<img src="images/logo-02-cbms2019.png">
+	</div>			
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				controlsLayout: 'edges',
+				progress: true,
+				slideNumber: true,
+				center: true,
+				hash: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

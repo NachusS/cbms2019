@@ -56,9 +56,7 @@
 				<h4 style="color: rgba(255, 225, 255, .9)">
 					(05-07)-Jun-2019 (Cordoba)
 					<img src="images/QR-Snomed2Vec.png" style="float: right; border: 0; padding: 0px; width: 20%; height: 20%"></img>
-				<!--	<div>
-						<img src="images/QR-Snomed2Vec.png" style="float: right; border: 0; padding: 0px; width: 20%; height: 20%"></img>
-					</div> -->
+
 				</h4>
 
 				<small><p>Medlab MediaGroup S.L.<br>
@@ -74,7 +72,7 @@
 						<li>Introduction</li>
 						<li>Word Embeddings</li>
 						<li>Snomed-CT</li>
-						<li>Snomed2Vec Approach</li>
+						<li>Snomed2Vec Implementation</li>
 						<li>Use Cases</li>
 						<li>Evaluation and Tips</li>
 						<li>Conclusion and Outlook</li>
@@ -90,32 +88,36 @@
 					<section>
 						<h2>Introduction:</h2>
 						<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the patients.</p>
-						<p><em><strong>Snomed2Vec</strong></em>, is an ontology based named entity recognition system using word embedding, that
+						<p>The free text in the (EHR), it's necesary to identify the clinical concept with a Clinical Terninology Code. </p>
+						<p><strong><em>Snomed2Vec</em></strong>, is an ontology based named entity recognition system using word embedding, that
 								suggest what is the most similar concept, that appear in a text.</p>
 						<aside class="notes">
 							<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the
-									patients.</p>
-									<p>One important goal in this kind of systems is that the information must be, 
-										normalized and codify with a clinical terminology to represent exactly the healthcare meaning.</p> 
-									Usually this process need human experts to identify and map the correct
-									concept, this is a slow and tedious task. One of the most widespread
-									clinical terminologies with more projection is Snomed-CT. 
-									This is an ontology multilingual clinical terminology that represent the clinical concepts with a unique code. 
-									We introduce in this paper Snomed2Vec, new approach of semantic search tool to find the most similar 
-									concepts using Snomed-CT.
+								patients.</p>
+							<p>One important goal in this kind of systems is that the information must be, 
+								normalized and codify with a clinical terminology to represent exactly the healthcare meaning.</p> 
+							<p>Usually this process need human experts to identify and map the correct
+								concept, this is a slow and tedious task. One of the most widespread
+								clinical terminologies with more projection is Snomed-CT. </p>
+								This is an ontology multilingual clinical terminology that represent the clinical concepts with a unique code. 
+								We introduce in this paper Snomed2Vec, new approach of semantic search tool to find the most similar 
+								oncepts using Snomed-CT.
 								</p>
 						</aside>
 					</section>				
 					<section>
-						<h2>Clasical N.E.R. Tools:</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
+						<h3>Mapping Clinical Concept:</h3>
+						<small><p>To identify the diagnosis and procedure, from the free text, we need a Clinical Terminology (ICD-10-MC,Snomed-CT..)</p></small>
+						<img src="images/codification.png" style="border: 0; padding: 0px; width: 70%; height: 70%"> </img>
+						<p>This process is heavy and need an expert.</p>
 
 					</section>
 					<section>
-						<h2>Spanish NER Tools:</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+						<h2>Spanish NER Tool approach:</h2>
+						<p>We present <strong>Snomed2Vec</strong>, a tool to improve the ontology-
+								based named entity recognition process, that suggest what is
+								the most similar concepts from Snomed-CT grouping by its
+								top level hierarchy.</p>
 					</section>
 				</section>
 				

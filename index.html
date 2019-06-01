@@ -16,8 +16,12 @@
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<!-- <link rel="stylesheet" href="css/main.css"> -->
-		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme"> 
+	
+		<!-- <link rel="stylesheet" href="css/main.css"> 
+			 <link rel="stylesheet" href="css/theme/league.css" id="theme"> -->
+		
 		
 		<!-- For syntax highlighting  -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -88,9 +92,9 @@
 					<section>
 						<h2>Introduction:</h2>
 						<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the patients.</p>
-						<p>The free text in the (EHR), it's necesary to identify the clinical concept with a Clinical Terninology Code. </p>
-						<p><strong><em>Snomed2Vec</em></strong>, is an ontology based named entity recognition system using word embedding, that
-								suggest what is the most similar concept, that appear in a text.</p>
+						<p>The majority of the (E.H.R.) has too much free text in the corpus of the documents, 
+							it's necesary to identify the clinical concept inside it and we need to map this text with a Clinical Terninology Code. </p>
+
 						<aside class="notes">
 							<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the
 								patients.</p>
@@ -114,10 +118,13 @@
 					</section>
 					<section>
 						<h2>Spanish NER Tool approach:</h2>
+
 						<p>We present <strong>Snomed2Vec</strong>, a tool to improve the ontology-
 								based named entity recognition process, that suggest what is
 								the most similar concepts from Snomed-CT grouping by its
 								top level hierarchy.</p>
+						<p><strong><em>Snomed2Vec</em></strong>, is an ontology based named entity recognition tool using word embedding, that
+									suggest what is the most similar concept, that appear in a text.</p>
 					</section>
 					<section>
 						<h3>Background and Related Work:</h3>
@@ -139,25 +146,61 @@
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">2. Word embedding:</h2>
 					</section>
 					<section>
-					<h2>Initial Idea: </h2>
-					<p> Definición de Word Embedding y el Enfoque de Word2Vec.
-					</p>
+						<h2>Initial Idea: </h2>
+						<img src="images/DonQuijote.jpg" style="float: left; border: 0; padding: 0px; width: 40%; height: 40%"></img>
+						In Spanish there is a proverb:
+						<blockquote class="fragment fade-up" cite="https://cvc.cervantes.es/lengua/refranero/ficha.aspx?Par=58521&Lng=0">
+							&ldquo;Dime con quien andas y te diré quien eres&rdquo;
+						</blockquote>
+						<small>[El Quijote II, 10 y 23]</small>
+						<blockquote class="fragment fade-up" cite="https://cvc.cervantes.es/lengua/refranero/ficha.aspx?Par=58521&Lng=0">
+							&ldquo;Tell me who you are your frinds and I'll tell you, who you are&rdquo;
+						</blockquote>
 					</section>
+					<section>
+						<blockquote>To identify the semantic meaning of a word, it depend of the words around it.</blockquote>
+						<p><strong>Word Embedding</strong> are based on the idea that contextual information alone 
+							constitutes a viable representation of linguistic terms</p>
+						<p>In <em>computational linguistic</em>, we use the term <strong>distributional semantic model</strong>, 
+							<em>linguistic items with similar distributions have similar meanings.</em> </p>
+					</section>
+					<section>
+						<h3>Evolution:</h3>
+						<ul>
+							<li>In 2003 <strong>Bengio et al.</strong> proposed a Neural language Model which learned distributed representations for words</li>
+							<li class="fragment fade-up"><strong>Collobert and Westorn</strong>(2008) was the firts work to show the utility of pre-trained word embeddings</li>
+							<li class="fragment fade-up">In 2013 <strong>Mikolov et al.</strong> proposed two methods <em>bag-of-word</em> and <em>skip-gram</em>, to construct high quality distributed vector representations</li>
+						</ul>
+					</section>
+					<section>
+						<h1>what is Word2Vec? </h1>
+					</section>
+					<section>
+						<strong><em>Word2Vec</em> is a group of related neural networks models to produce word embedding</strong>
+						<p>
+							<img src="images/cbow1.png" style="border: 0; padding: 0px; width: 50%; height: 50%"> </img>
+						</p>
+						<hr>
+						<pre><code data-trim>
+							Codigo de prueba Zapatera
+						</code>
+						</pre>
 
+					</section>
 				</section>
 				
 				<section>
 					<section data-transition="zoom" data-background="images/cbms_fondo03.jpg">
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">3. Snomed-CT:</h2>
 					</section>
-					<section id="fragments">
+					<section>
 						<h2>Snomed-CT</h2>
 						<p><small>Systematized Nomenclature of Medicine Clinical Terms</small></p>
 						<p><strong>Component</strong>, is organized in concepts, descriptions and relationships: </p>
 						<ul>
-							<li><p class="fragment"><strong>Concepts</strong>, is the way to represent a clinical concept.</p></li>
-							<li><p class="fragment"><strong>Descriptions</strong>, represeting the human readable term of a concept</p></li>
-							<li><p class="fragment"><strong>Relationships</strong>, represent an association between concepts.</p></li>
+							<li><p class="fragment fade-up"><strong>Concepts</strong>, is the way to represent a clinical concept.</p></li>
+							<li><p class="fragment fade-up"><strong>Descriptions</strong>, represeting the human readable term of a concept</p></li>
+							<li><p class="fragment fade-up"><strong>Relationships</strong>, represent an association between concepts.</p></li>
 						</ul>
 						<small><p>The meaning of the concept has a hierarchy structure, from general to more detail.</p></small>
 					</section>
@@ -255,6 +298,7 @@
 				<img src="images/logo-02-cbms2019_100x22.png">
 	</div>			
 		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
 
 		<script>
 
@@ -266,7 +310,7 @@
 				slideNumber: true,
 				center: true,
 				hash: true,
-
+				rollingLinks: true,
 				transition: 'convex', // none/fade/slide/convex/concave/zoom
 
 				// More info https://github.com/hakimel/reveal.js#dependencies

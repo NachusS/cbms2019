@@ -93,10 +93,11 @@
 						<h2>Introduction:</h2>
 						<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the patients.</p>
 						<p>The majority of the (E.H.R.) has too much free text in the corpus of the documents, 
-							it's necesary to identify the clinical concept inside it and we need to map this text with a Clinical Terninology Code. </p>
+							it's necesary normalized the text, to identify the clinical concept inside it, and we need to map 
+							this text with a Standard Clinical Terninology Code. </p>
 
 						<aside class="notes">
-							<p>Hospital Information Systems (H.I.S) use Electronic Health Record to store heterogeneous data from the
+							<p>Hospital Information Systems (H.I.S) use Electronic Health Record, to store heterogeneous data from the
 								patients.</p>
 							<p>One important goal in this kind of systems is that the information must be, 
 								normalized and codify with a clinical terminology to represent exactly the healthcare meaning.</p> 
@@ -118,13 +119,11 @@
 					</section>
 					<section>
 						<h2>Spanish NER Tool approach:</h2>
-
-						<p>We present <strong>Snomed2Vec</strong>, a tool to improve the ontology-
-								based named entity recognition process, that suggest what is
-								the most similar concepts from Snomed-CT grouping by its
-								top level hierarchy.</p>
 						<p><strong><em>Snomed2Vec</em></strong>, is an ontology based named entity recognition tool using word embedding, that
-									suggest what is the most similar concept, that appear in a text.</p>
+							suggest what is the most similar concept of Snomed-CT, that appear in a text.</p>
+						<p>We present <strong>Snomed2Vec</strong>, a tool to search a text in Snomed-CT, 
+							using an ontology-based named entity recognition process, that suggest what is
+								the most similar concepts from Snomed-CT grouping by its top level hierarchy.</p>
 					</section>
 					<section>
 						<h3>Background and Related Work:</h3>
@@ -158,7 +157,10 @@
 						</blockquote>
 					</section>
 					<section>
-						<blockquote>To identify the semantic meaning of a word, it depend of the words around it.</blockquote>
+
+						<pre><code data-trim style="text-align: center;">To identify the semantic meaning of a word, 
+it depend of the words around it.</code></pre>
+
 						<p><strong>Word Embedding</strong> are based on the idea that contextual information alone 
 							constitutes a viable representation of linguistic terms</p>
 						<p>In <em>computational linguistic</em>, we use the term <strong>distributional semantic model</strong>, 
@@ -169,20 +171,42 @@
 						<ul>
 							<li>In 2003 <strong>Bengio et al.</strong> proposed a Neural language Model which learned distributed representations for words</li>
 							<li class="fragment fade-up"><strong>Collobert and Westorn</strong>(2008) was the firts work to show the utility of pre-trained word embeddings</li>
-							<li class="fragment fade-up">In 2013 <strong>Mikolov et al.</strong> proposed two methods <em>bag-of-word</em> and <em>skip-gram</em>, to construct high quality distributed vector representations</li>
+							<li class="fragment fade-up">In 2013 <strong>Mikolov et al.</strong> proposed <em>Word2Vec</em>, with two approach, <em>bag-of-word</em> and <em>skip-gram</em>, to construct high quality distributed vector representations</li>
 						</ul>
 					</section>
 					<section>
 						<h1>what is Word2Vec? </h1>
 					</section>
 					<section>
-						<strong><em>Word2Vec</em> is a group of related neural networks models to produce word embedding</strong>
-						<p>
-							<img src="images/cbow1.png" style="border: 0; padding: 0px; width: 50%; height: 50%"> </img>
-						</p>
-						<hr>
+						<strong><em>Word2Vec</em></strong> is a shallow neural networks with one hidden layer, to produce word embedding
+						<img src="images/W2V-Architecture.png" style="border: 0; padding: 0px; width: 60%; height: 60%"> </img>	
+
+						<small>				
+							<ol>
+								<li>Input is a <strong>One hot</strong> vector of all words from text</li>
+								<li>One hide layer, with <strong>size</strong> of the word vector </li>
+								<li>A output layer, using a <strong>SoftMax</strong> classifier</li>
+							</ol>
+						</small>
+	
+					</section>
+					<section>
+						<p>Word2vec is two approach– CBOW(Continuous bag of words) and Skip-gram model.</p>
+						<p><small>Learn weights which act as word vector representations, with a size window, about the word context</small></p>
+						<img src="images/CBOW-SkipGram.png" style="border: 0; padding: 0px; width: 50%; height: 50%"> </img>
+						<p style="font-size: 20px">The training method of word2vec is backpropagation with stochastic gradient descent.</p>
+						<img src="images/CBOW-ObjectiveFunc.png" style="float: left; border: 0; padding: 0px; width: 40%; height: 40%"> </img>
+						<img src="images/SkipGram-ObjectiveFunc.png" style="float: right;border: 0; padding: 0px; width: 40%; height: 40%"> </img>
+					</section>
+					<section>
+						<p>There is no activation function on the hidden layer neurons, but the output neurons use softmax clasification 
+							method to build a probability distribution.</p>
+						<p>Word2Vecs'trick:
+								Don’t train a simple neural network with a single hidden layer to perform a certain task, 
+								the goal is just to learn the weights of the hidden layer. 
+								It'll be the “word vectors” so this is the goal of the train.</p>
 						<pre><code data-trim>
-							Codigo de prueba Zapatera
+							The hidden layer, represent the vector of the word in the space model
 						</code>
 						</pre>
 
@@ -198,9 +222,9 @@
 						<p><small>Systematized Nomenclature of Medicine Clinical Terms</small></p>
 						<p><strong>Component</strong>, is organized in concepts, descriptions and relationships: </p>
 						<ul>
-							<li><p class="fragment fade-up"><strong>Concepts</strong>, is the way to represent a clinical concept.</p></li>
-							<li><p class="fragment fade-up"><strong>Descriptions</strong>, represeting the human readable term of a concept</p></li>
-							<li><p class="fragment fade-up"><strong>Relationships</strong>, represent an association between concepts.</p></li>
+								<li class="fragment fade-up"><strong>Concepts</strong>, is the way to represent a clinical concept.</li>
+								<li class="fragment fade-up"><strong>Descriptions</strong>, represeting the human readable term of a concept</li>
+								<li class="fragment fade-up"><strong>Relationships</strong>, represent an association between concepts.</li>
 						</ul>
 						<small><p>The meaning of the concept has a hierarchy structure, from general to more detail.</p></small>
 					</section>
@@ -218,29 +242,66 @@
 					<section data-transition="zoom" data-background="images/cbms_fondo04.jpg">
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">4. Snomed2Vec Approach:</h2>
 					</section>	
-
-					
-					<section data-background-iframe="https://nachuss.github.io/" data-background-interactive>
-						<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-							<h2>Nachus' Page</h2>
-							<p>Pagina personal del Autor de la presentacion</p>
-						</div>
-					</section>				
+					<section>
+						<h3>1. DataSets Creations:</h3>
+							<img src="images/Snomed2Vec-DataSets.png" style="border: 0; padding: 0px; width: 40%; height: 40%"> </img>
+					</section>
+					<section>
+						<h3>2. Preprocessing Text:</h3>
+						<ul>
+							<li>Get Spanish Wikipedia Dump</li>
+								<li><small><a href="https://github.com/attardi/wikiextractor">Use WikiExtractor framework</a> from Guiseppe Attardi</small></li>  
+							<strong>Normalized Text:</strong>
+								<li>Lowing words, removing some punctuation sign.</li>
+								<li>Eliminating Spanish accent</li>
+								<li>Remove some <strong>StopWord</strong>, but not the negative words</li>
+						</ul>
+					</section>
+					<section>
+						<h3>3. Apply Word2Vec Gensim (Skipgram) framework</h3>
+						<ul>
+							<strong>Parameters:</strong>
+							<li>Size=300, size of the vector</li>
+							<li>Window=8, Context size</li>
+							<li>min_count=1, less frecuency word</li>
+							<li>sh=1, SkipGram framework</li>
+							<li>hs= SoftMax, classifier</li>
+						</ul>
+						<p>After trainning process, we get 2 model.</p>
+					</section>
+					<section>
+						<h3>4. Final Words Space Vector Models</h3>
+						<ol>
+							<li><strong>Model_01</strong>, local domain trainning model, (Emergency Reports + Snomed Descriptions)</li>
+							<li><strong>Model_02</strong>, General domain trainning model, (Spanish Wikipedia + Snomed Descriptions)</li>
+						</ol>
+					</section>
 				</section>
 
 				<section>
 					<section data-transition="zoom" data-background="images/cbms_fondo05.jpg">
-						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">5. Use Cases:</h2>
+						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">5. Final Snomed2Vec Model And Similarity Methods:</h2>
 					</section>	
 					<section>
-						<h2>Clever Quotes</h2>
-						<p>
-							These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">The nice thing about standards is that there are so many to choose from</q> and block:
-						</p>
-						<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-							&ldquo;Tell me who go with you, and I'll tell you Who you are.&rdquo;
-						</blockquote>
+						<h3>1. Final Snomed2Vec Model.</h3>
+						<p>To get the final Snomed2Vec model approach, we use the previous Models (01, 02), to create a 2 news space Model, 
+							with the descripcions tems of Snomed-CT.</p>
+						<p>From the Snomed-CT DataSet, with the structure:</p>
+						<img src="images/Snomed2Vec-DataSet00.png" style="border: 0; padding: 0px; width: 40%; height: 40%"> </img>
+
 					</section>
+					<section>
+						<h3>2. Getting final description Vector</h3>
+						<p>Use the previous Word Space Models, to get the final description terms vector.</p>
+						<ol>
+							<li><em><strong>d</strong></em>= Description Terms = (w1 + w2+ ...+wn)</li>
+							<li><em><strong>Vector Description (d), v(d)=</strong></em></li>
+						</ol>
+					</section>
+					<section data-markdown>
+						    "$$ w_1 + w_2 $$"
+
+						</section>
 				</section>
 				
 				
@@ -288,6 +349,12 @@
 						- <a href="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es">Adrian Alonso</a> <br>
 						- <a href="https://www.murciasalud.es/caps.php?op=mostrar_centro&id_centro=14&tipo_centro=hospital&idsec=6">David Guevara Baraza</a>
 					</p>
+				</section>
+				<section data-background-iframe="https://nachuss.github.io/" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Nachus' Page</h2>
+						<p>Pagina personal del Autor de la presentacion</p>
+					</div>
 				</section>
 
 			</div>

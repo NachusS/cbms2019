@@ -321,9 +321,32 @@ it depend of the words around it.</code></pre>
 							<li>We apply over the Final <strong>Snomed2Vec</strong> space Model.</li>
 						</ul>
 						</small>
+					</section>
+					<section>
+						<h2>Implementation tricks 1/2</h2>
+						<small>
+						<p><a href="https://github.com/RaRe-Technologies/gensim/blob/develop/gensim/models/word2vec.py">Gensim implementation</a>, to our solution</p>
+						<p>Creation of the Initial Matrix to get the Snomed2Vec Vector Space Model</p>
+						</small>
+						<pre><code class="python" data-trim contenteditable style="font-size: 15px;">
+# Input data = DataSet-Matrix
+def init_vars(data):
+    vector_size = len(data['vecSnom'][0])
+    vocab_size = len(data['vecSnom'])
+    print(vector_size)
+    print(vocab_size)
+    logging.info("precomputing L2-norms of word weight vectors")
+    index2word = data['concept'].tolist() # map from a word's matrix index (int) to word (string)
+    syn0 = np.array(data['vecSnom'].tolist(), dtype=REAL)
+    syn0[np.isnan(syn0)] = 0.0
+    syn0norm = zeros((vocab_size, vector_size), dtype=REAL)
+    np.seterr(divide='ignore', invalid='ignore')
+    syn0norm = (syn0 / sqrt((syn0 ** 2).sum(-1))[..., newaxis]).astype(REAL)
+    return syn0, index2word, syn0norm
+						</code></pre>
 					</section>					
 					<section>
-						<h2>Implementation tricks</h2>
+						<h2>Implementation tricks 2/2</h2>
 						<pre><code class="python" data-trim contenteditable style="font-size: 15px;">
 	def mas_similar(positive=[], model=w2vModel, topn=15):
     	vector=vectorSnomed(positive,model,300)
@@ -339,6 +362,20 @@ it depend of the words around it.</code></pre>
     	return result[:topn]
 						</code></pre>
 					</section>
+					<section>
+						<h2>5. New Methods Snomed2Vec</h2>
+						<p>We create next methods to use with Snomed2Vec:</p>
+						<small>
+						<ol>
+							<li><strong>vectorSnomed</strong>(queryText, model, size):</li>
+							<ul><li> Out: q(Query txt), v(q)= &sum;<sub>(i=1)</sub> v[w<sub>i</sub>] </li></ul>
+							<li><strong>Mas_Similar</strong>(txt, model, topn):</li>
+							<ul><li> Out: List of n items more closed in the Space model from vector(txt) </li></ul>
+							<li><strong>Similares</strong>(term, jer='all', nMax=3):</li>
+							<ul><li> Out: List of nMax more similar concepts from Snomed-CT, grouping by hierarchy </li></ul>
+						</ul>
+						</small>
+					</section>					
 				</section>
 					
 				</section>
@@ -349,32 +386,53 @@ it depend of the words around it.</code></pre>
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">6. Use Cases:</h2>
 					</section>	
 				
-					<section data-state="customevent">
-						<h2>State Events</h2>
-						<p>
-							Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-						</p>
-						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-											Reveal.addEventListener( 'customevent', function() {
-											console.log( '"customevent" has fired' );
-											} );
-						</code></pre>
+					<section>
+						<h2>Use case:</h2>
+						<small>
+						<p>Snomed2Vec: it's a Tool to help the expert, choose the best Snomed-CT concept, from a text.</p>
+						<p>I you train the model with a local Domain you can solve abbreviations for a specific domain.</p>
+						</small>
+						<img src="images/cosine-similarity.png" style="border: 0; padding: 0px; width: 50%; height: 50%"> </img>
+
 					</section>
+
 				</section>				
 				<section>
 
 					<section data-transition="zoom" data-background="images/cbms_fondo07.jpg">
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">7. Evaluation and tips:</h2>
 					</section>
+
 					<section>
-						<h3>Evaluation and Tips:</h3>
+						<h2>Evaluations:</h2>
+						<p>We proposed, two kind of evaluations:<p>
+						<ol>
+							<li>Using a Corpus Gold Data, prepared for this experiment, with two Documentalist experts </li>
+							<li>A social approach, to evaluate the paper, with a public survey. </li>
+						</ol>
 					</section>
+					<section>
+						<h2>Contributions:</h2>
+						<p>We publish a Github repository, for this project, to share the Notebooks:<p>
+						
+						<p>You can reproduce and improve this development, with this code.</p>
+
+					</section>					
+
 				</section>					
 				<section>				
 					<section data-transition="zoom" data-background="images/cbms_fondo08.jpg">
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">8. Conclusion and Outlook:</h2>
 					</section>
 					<section>
+					<h2>Conclusions:</h2>
+					<ol>
+						<li> </li>
+						<li> </li>
+						<li> </li>
+						<li> </li>
+						<li> </li>
+					</ol>
 					</section>				
 				</section>
 				<section style="text-align: left;">
@@ -385,16 +443,41 @@ it depend of the words around it.</code></pre>
 						- <a href="http://decsai.ugr.es/index.php?p=profesores&id=7932">Juan Luis Castro Peña</a> <br>
 						- <a href="https://webs.um.es/jfernand/miwiki/doku.php">Jesualdo Tomas Fenandez Breis</a> <br>
 						- <a href="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es">Ignacio San Roman Lana</a> <br>
-						- <a href="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es">Adrian Alonso</a> <br>
+						- <a href="https://medlabmediagroup.com/es/inicio/">Adrian Alonso</a> <br>
 						- <a href="https://www.murciasalud.es/caps.php?op=mostrar_centro&id_centro=14&tipo_centro=hospital&idsec=6">David Guevara Baraza</a>
 					</p>
 				</section>
-				<section data-background-iframe="https://github.com/NachusS/Snomed2Vec" data-background-interactive>
+
+				<section data-background-iframe="https://github.com/NachusS/Snomed2Vec/" data-background-interactive>
 					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
 						<h2>Snomed2Vec' Project Page</h2>
 						<p>Project web Snomed2Vec with notebooks and implementation</p>
 					</div>
 				</section>
+				<section data-background-iframe="http://decsai.ugr.es/index.php?p=profesores&id=7932" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Juan Luis Castro's Page</h2>
+						<p>Information and references of this autor</p>
+					</div>
+				</section>
+				<section data-background-iframe="https://webs.um.es/jfernand/miwiki/doku.php/" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Jesualdo Tomas Fernandez's Page</h2>
+						<p>Information and references of this autor</p>
+					</div>
+				</section>
+				<section data-background-iframe="https://www.linkedin.com/in/ignaciosrl/?originalSubdomain=es" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Ignacio San Roman's Page</h2>
+						<p>Information and references of this autor</p>
+					</div>
+				</section>
+				<section data-background-iframe="https://medlabmediagroup.com/es/inicio/" data-background-interactive>
+					<div style="position: absolute; width: 20%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Adrian Alonso's Page at Medlab</h2>
+						<p>Information and references of this autor</p>
+					</div>
+				</section>				
 
 			</div>
 

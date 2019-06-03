@@ -283,7 +283,7 @@ it depend of the words around it.</code></pre>
 						<h2 style="display:block;background:rgba(235,235,235,0.7);color:#404040;padding:13px 10px 10px 10px;border-radius:3px;">5. Final Snomed2Vec Model And Similarity Methods:</h2>
 					</section>	
 					<section>
-						<h3>1. Final Snomed2Vec Model.</h3>
+						<h2>1. Final Snomed2Vec Model.</h2>
 						<p>To get the final Snomed2Vec model approach, we use the previous Models (01, 02), to create a 2 news space Model, 
 							with the descripcions tems of Snomed-CT.</p>
 						<p>From the Snomed-CT DataSet, with the structure:</p>
@@ -291,17 +291,37 @@ it depend of the words around it.</code></pre>
 
 					</section>
 					<section>
-						<h3>2. Getting final description Vector</h3>
+						<h2>2. Getting final description Vector</h2>
 						<p>Use the previous Word Space Models, to get the final description terms vector.</p>
 						<ol>
-							<li><em><strong>d</strong></em>= Description Terms = (w1 + w2+ ...+wn)</li>
-							<li><em><strong>Vector Description (d), v(d)=</strong></em></li>
+							<li>Description Terms => <em><strong>(d)</strong></em> = (w<sub>1</sub> + w<sub>2</sub> + ... + w<sub>n</sub>)</li>
+							<li><em><strong>v(d)=</strong></em> &sum;<sub>(i=1)</sub> v[w<sub>i</sub>] &equiv; v[w<sub>1</sub>]+v[w<sub>2</sub>]+...+v[w<sub>n</sub>]
+							</li>
 						</ol>
 					</section>
-					<section data-markdown>
-						    "$$ w_1 + w_2 $$"
-
+					<section>
+						<h2>3. Final Space Model - Snomed2Vec</h2>
+						<img src="images/SnomedWork.png" style="border: 0; padding: 0px; width: 90%; height: 90%"> </img>
+						<p>To get the Top level hierarchy of a concept, we need to use: <a href="https://confluence.ihtsdotools.org/display/DOCTSG/7.5.2+Transitive+closure+implementation">Snomed-CT Transitive closure implementation</a></p>
 					</section>
+					<section>
+						<h2>3.1 Design Process - Snomed2Vec</h2>
+						<img src="images/Snomed2Vec-Process01.png" style="border: 0; padding: 0px; width: 60%; height: 60%"> </img>
+						<hr>
+						<img src="images/Snomed2Vec-Process02.png" style="border: 0; padding: 0px; width: 60%; height: 60%"> </img>
+					</section>
+					<section>
+						<h2>4. Similarity Distance - New Approach</h2>
+						<p>We use the Cosine distance, to identify the similarity between concepts</p>
+						<img src="images/cosine-similarity.png" style="border: 0; padding: 0px; width: 50%; height: 50%"> </img>
+						<p>Our approach is:</p>
+						<small>
+						<ul>
+							<li>we apply Gensim distance of the Siumilarty method implementation, but not, over the the Space model of the trainner modesl (01, 02).</li>
+							<li>We apply over the Final <strong>Snomed2Vec</strong> space Model.</li>
+						</ul>
+						</small>
+					</section>					
 					<section>
 						<h2>Implementation tricks</h2>
 						<pre><code class="python" data-trim contenteditable style="font-size: 15px;">
@@ -319,6 +339,8 @@ it depend of the words around it.</code></pre>
     	return result[:topn]
 						</code></pre>
 					</section>
+				</section>
+					
 				</section>
 				
 				

@@ -4,6 +4,6 @@ Paper: **Snomed2Vec: represntation of SNOMED-CT terms with Word2Vec**
 
 Access Presentation: <a href="https://nachuss.github.io/cbms2019/#/"> Snomed2Vec Presentation Congress</a>
 <hr>
-This presentation it's link with the github project: <a href="https://github.com/NachusS/Snomed2Vec"> Snomed2Vec github repository</a> 
+This presentation it's link with the github project: <a href="https://github.com/NachusS/Snomed2Vec"> Snomed2Vec github repository</a> With the notebooks, access to the models, to reproduce the experiment.
 <hr>
 You can test a beta prototype in this link <a href="http://snomed2vec.jasonjimnzdev.es/">Snomed2Vec prototype tool</a>

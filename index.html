@@ -76,12 +76,11 @@
 						<li>Introduction</li>
 						<li>Word Embeddings</li>
 						<li>Snomed-CT</li>
-						<li>Snomed2Vec Implementation</li>
+						<li>Snomed2Vec Approach</li>
+						<li>Final Snomed2Vec Model</li>
 						<li>Use Cases</li>
 						<li>Evaluation and Tips</li>
 						<li>Conclusion and Outlook</li>
-						<li>Project Web And Notebooks</li>
-						
 					</ul>
 				</section>
 				<section>
@@ -171,7 +170,8 @@ it depend of the words around it.</code></pre>
 						<ul>
 							<li>In 2003 <strong>Bengio et al.</strong> proposed a Neural language Model which learned distributed representations for words</li>
 							<li class="fragment fade-up"><strong>Collobert and Westorn</strong>(2008) was the firts work to show the utility of pre-trained word embeddings</li>
-							<li class="fragment fade-up">In 2013 <strong>Mikolov et al.</strong> proposed <em>Word2Vec</em>, with two approach, <em>bag-of-word</em> and <em>skip-gram</em>, to construct high quality distributed vector representations</li>
+							<li class="fragment fade-up">In 2013 <strong>Mikolov et al.</strong> proposed <em>Word2Vec</em>, with two approach, 
+								<em>continous bag-of-word</em> and <em>skip-gram</em>, to construct high quality distributed vector representations</li>
 						</ul>
 					</section>
 					<section>
@@ -258,7 +258,7 @@ it depend of the words around it.</code></pre>
 							</ul>
 							<li><strong>DataSet_Model02</strong>, (Spanish Wikipedia Dump + Snomed-cT Descriptions), General domain</li>
 							<ul>
-								<li><a href="https://github.com/attardi/wikiextractor">We use WikiExtractor framework</a> from Guiseppe Attardi</li>
+								<li><a href="https://github.com/attardi/wikiextractor">Link to: WikiExtractor framework</a> from Guiseppe Attardi</li>
 							</ul>
 
 							<li><strong>Normalized Text:</strong></li>
@@ -304,7 +304,7 @@ it depend of the words around it.</code></pre>
 						<p>From the Snomed-CT DataSet, with the structure:</p>
 						<img src="images/Snomed2Vec-DataSet00.png" style="border: 0; padding: 0px; width: 40%; height: 40%"> </img>
 						<small>
-							<p>(*)To get the Top level hierarchy of a concept, we need to use: <a href="https://confluence.ihtsdotools.org/display/DOCTSG/7.5.2+Transitive+closure+implementation">Snomed-CT Transitive closure implementation</a></p>
+							<p>(*)Link to: get the Top level hierarchy of a concept, we need to use: <a href="https://confluence.ihtsdotools.org/display/DOCTSG/7.5.2+Transitive+closure+implementation">Snomed-CT Transitive closure implementation</a></p>
 						</small>
 					</section>
 					<section>
@@ -382,7 +382,7 @@ it depend of the words around it.</code></pre>
 					<section>
 						<h2>Implementation tricks 1/2</h2>
 						<small>
-						<p><a href="https://github.com/RaRe-Technologies/gensim/blob/develop/gensim/models/word2vec.py">Gensim implementation</a>, to our solution</p>
+						<p><a href="https://github.com/RaRe-Technologies/gensim/blob/develop/gensim/models/word2vec.py">Link to: Gensim implementation</a>, to our solution</p>
 						<p>Creation of the Initial Matrix to get the Snomed2Vec Vector Space Model</p>
 						</small>
 						<pre><code class="python" data-trim contenteditable style="font-size: 15px;">
@@ -443,7 +443,7 @@ def init_vars(data):
 				
 					<section>
 						<h2>Use case:</h2>
-						<p><small><a href="http://snomed2vec.jasonjimnzdev.es/" target="_blank">Here You can try On line Snomed2Vec tool</a></small></p>
+						<p><small><a href="http://snomed2vec.jasonjimnzdev.es/" target="_blank">Link to: On line Snomed2Vec protoype tool</a></small></p>
 						<img src="images/EjemploSnomed2Vec01.png" style="border: 0; padding: 0px; width: 70%; height: 70%"> </img>
 						<img src="images/EjemploSnomed2Vec03.png" style="border: 0; padding: 0px; width: 60%; height: 60%"> </img>
 					</section>
@@ -472,14 +472,14 @@ def init_vars(data):
 							<img src="images/F1_meassure.png" style="border: 0; padding: 0px; width: 60%; height: 60%"> </img>
 							<img src="images/TableResults.png" style="border: 0; padding: 0px; width: 30%; height: 30%"> </img>
 							<p>Use this survey:</p>
-							<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSerCEqABYqYXs69O1a8_JVuRd5B_dKmfpGRDw8BRWREm0P7lw/viewform">A social approach, to evaluate the paper, with a public survey.</a> </li>
+							<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSerCEqABYqYXs69O1a8_JVuRd5B_dKmfpGRDw8BRWREm0P7lw/viewform">Link to: A social approach, to evaluate the paper, with a public survey.</a> </li>
 						</ol>
 					</small>
 					</section>
 					<section>
 						<h2>Contributions:</h2>
 						<p>We publish a Github repository, for this project, to share the Notebooks:<p>
-						<p>Snomed2Vec Github: <a href="https://github.com/NachusS/Snomed2Vec">Snomed2Vec Github Project</a></p>
+						<p>Snomed2Vec Github: <a href="https://github.com/NachusS/Snomed2Vec">Link to: Snomed2Vec (https://github.com/NachusS/Snomed2Vec)</a></p>
 						<p>You can reproduce and improve this development, with this code.</p>
 
 					</section>					
@@ -503,7 +503,7 @@ def init_vars(data):
 					<h1>THE END</h1>
 					<p>
 						Autores: <br>
-						<img src="images/QR-EncuestaCBMS2019.png" style="float: right; border: 0; padding: 0px; width: 20%; height: 20%"></img>
+						<img src="images/QR-EncuestaCBMS2019.png" style="float: right; border: 0; padding: 0px; width: 30%; height: 30%"></img>
 						- <a href="https://nachuss.github.io/" target="_blank">Ignacio Martínez Soriano</a> <br>
 						- <a href="http://decsai.ugr.es/index.php?p=profesores&id=7932" target="_blank">Juan Luis Castro Peña</a> <br>
 						- <a href="https://webs.um.es/jfernand/miwiki/doku.php" target="_blank">Jesualdo Tomas Fenandez Breis</a> <br>
@@ -513,7 +513,7 @@ def init_vars(data):
 					</p>
 					<hr>
 					<p>
-					<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdGoKAMT_jykJTzb2SnHiSXK-rTqSzm2HLG4Q0DdIzR0xbrhQ/viewform">Please fill Satisfaction Survey</a>
+					<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdGoKAMT_jykJTzb2SnHiSXK-rTqSzm2HLG4Q0DdIzR0xbrhQ/viewform">Link to: Please fill Satisfaction Survey</a>
 					
 				</p>
 				</section>
